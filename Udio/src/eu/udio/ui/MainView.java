@@ -16,7 +16,7 @@ public class MainView extends VLayout implements FeedbackPresenter{
 	private ToolStrip toolBar = new ToolStrip();
 	private Label feedbackLabel;
 	private Button upload = new Button("Upload");
-	
+		
 	public MainView(String applicationTitle){		
 		setWidth100();
 		setHeight100();
@@ -25,17 +25,19 @@ public class MainView extends VLayout implements FeedbackPresenter{
         topBar.setHeight(33);
         topBar.setWidth100();
         //Add Image here
-        topBar.addSpacer(6);
+        topBar.addSpacer(30);
         Label title = new Label(applicationTitle);
+        title.setStyleName("title");
         title.setWidth(300);
         topBar.addMember(title);
         topBar.addFill();
         topBar.setStyleName("topBar");
         
-        toolBar.addMember(upload);
+        toolBar.addSpacer(30);
+        toolBar.addMember(upload);        
         toolBar.addFill();
         toolBar.setWidth100();
-        toolBar.setStyleName("topBar");
+        //toolBar.setStyleName("topBar");
         
 		setMembers(topBar, toolBar,displayStack);
 		FeedbackService.setFeedbackPresenter(this);

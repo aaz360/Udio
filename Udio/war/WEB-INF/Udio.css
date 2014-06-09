@@ -2,3 +2,8 @@
 .topBar {
 	background: none;	
 }
+
+.title {
+	font-size: large;
+	font: bold;
+}
