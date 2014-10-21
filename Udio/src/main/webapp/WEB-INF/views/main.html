@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/resources/main.css"/>
+    <link rel="stylesheet" href="/resources/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/resources/jquery-ui-1.11.1.custom/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="/resources/jquery-ui-1.11.1.custom//jquery-ui.structure.min.css"/>
+    <link rel="stylesheet" href="/resources/jquery.fileupload.css"/>
+    <script type="text/javascript" src="/resources/jquery-1.11.1.min.js"></script>    
+    <script type="text/javascript" src="/resources/jquery-ui-1.11.1.custom/jquery-ui.js"></script>
+    <script type="text/javascript" src="/resources/main.js"></script>
+    <script type="text/javascript" src="/resources/fileupload.js"></script>    
+    <script type="text/javascript" src="/resources/js/jquery.fileupload.js"></script>    
+	<script src="/resources/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.fileupload-process.js"></script>    
+    <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>    
+    <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.fileupload-image.js"></script>  
+    <title>Udio</title>
+</head>
+<body>
+    <div class="nav">
+		<div class="container">
+			<ul class="pull-left">
+				<li><img  id='logo' src='/resources/logo.png'></img>Beta</li>
+			</ul>			
+			<ul class="pull-right">				
+				<li><a href="#login">Log Out</a></li>
+			</ul>
+		</div>
+	</div>
+    <div class="container"> 
+        <div class="menu-left">
+        <ul>
+            <li>
+                <img name="upload" id="upload" src="/resources/1413571277_upload-48.png"/>
+            </li>
+        </ul>
+        </div>        
+    </div>   
+        
+	<form style="display:none" action="upload" method="post" enctype="multipart/form-data">
+		<div>
+			Upload file: <input type="file" name="fileUpload1" id="fileUpload1"/>
+			<input type="submit" value="Upload"></input>
+		</div>
+	</form>   
+            
+        <form name="account_form" id="account_form" enctype="multipart/form-data">
+            <br/>
+            <br/>
+            <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Add files...</span>
+                <!-- The file input field used as target for the file upload widget -->
+                <input id="fileupload" type="file" name="file[]"></input>
+            </span>
+            <br/>
+            <br/>            
+            <fieldset>
+                <label for="tags">Tags</label>
+                <input type="text" name="tags" id="tags" class="text ui-widget-content ui-corner-all"></input>
+            </fieldset>            
+            <div id="files" class="files"></div>
+            <br/>
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>             
+        </form>
+    <div id="dialog-form" title="Upload" >
+    </div>	
+</body>
+</html>
