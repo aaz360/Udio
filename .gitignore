@@ -1,3 +1,5 @@
 
 /Udio/build
 /Udio/bin
+/Udio/src/main/resources/aws-credentials.props
+
