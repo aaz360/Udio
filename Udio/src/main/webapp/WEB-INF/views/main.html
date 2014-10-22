@@ -5,18 +5,15 @@
     <link rel="stylesheet" href="/resources/main.css"/>
     <link rel="stylesheet" href="/resources/bootstrap.min.css"/>
     <link rel="stylesheet" href="/resources/jquery-ui-1.11.1.custom/jquery-ui.min.css"/>
-    <link rel="stylesheet" href="/resources/jquery-ui-1.11.1.custom//jquery-ui.structure.min.css"/>
-    <link rel="stylesheet" href="/resources/jquery.fileupload.css"/>
+    <link rel="stylesheet" href="/resources/jquery-ui-1.11.1.custom//jquery-ui.structure.min.css"/>   
     <script type="text/javascript" src="/resources/jquery-1.11.1.min.js"></script>    
     <script type="text/javascript" src="/resources/jquery-ui-1.11.1.custom/jquery-ui.js"></script>
-    <script type="text/javascript" src="/resources/main.js"></script>
-    <script type="text/javascript" src="/resources/fileupload.js"></script>    
-    <script type="text/javascript" src="/resources/js/jquery.fileupload.js"></script>    
-	<script src="/resources/js/jquery.iframe-transport.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.fileupload-process.js"></script>    
-    <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>    
-    <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.fileupload-image.js"></script>  
+    <script type="text/javascript" src="/resources/main.js"></script>    
+    <!-- This is for file Upload -->
+    <script src="/resources/angular-file-upload-bower-1.6.12/angular-file-upload-shim.min.js"></script> 
+    <script src="/resources/angular.min.js"></script>
+    <script src="/resources/angular-file-upload-bower-1.6.12/angular-file-upload.min.js"></script>    
+    
     <title>Udio</title>
 </head>
 <body>
@@ -47,7 +44,7 @@
 		</div>
 	</form>   
             
-        <form name="account_form" id="account_form" enctype="multipart/form-data">
+    <form style="display:none" name="account_form" id="account_form" enctype="multipart/form-data">
             <br/>
             <br/>
             <span class="btn btn-success fileinput-button">
@@ -69,6 +66,33 @@
             </div>             
         </form>
     <div id="dialog-form" title="Upload" >
-    </div>	
+    </div>
+
+    <div class="upload-div" ng-controller="UploadController" ng-app="fileUpload">
+        
+        
+        </br>
+        Tags :<input class="ng-pristine ng-valid" type="text" ng-model="tagModel"></input>
+
+        <br/>
+        Progress:
+		<br/>
+		<br/>
+		<div ng-show="selectedFiles != null">
+			<div class="sel-file" ng-repeat="f in selectedFiles">
+				{{($index + 1) + '.'}}
+				<img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}">
+				<button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>
+				<span class="progress" ng-show="progress[$index] >= 0">						
+					<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
+				</span>				
+				<button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>
+				{{f.name}} - size: {{f.size}}B - type: {{f.type}}
+			</div>
+		</div>
+
+    </div>
+
+
 </body>
 </html>
