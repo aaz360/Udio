@@ -1,0 +1,21 @@
+<form style="display" name="account_form" id="account_form" enctype="multipart/form-data">
+            <br/>
+            <br/>
+            <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Add files...</span>
+                <!-- The file input field used as target for the file upload widget -->
+                <input id="fileupload" type="file" name="file[]"></input>
+            </span>
+            <br/>
+            <br/>            
+            <fieldset>
+                <label for="tags">Tags</label>
+                <input type="text" name="tags" id="tags" class="text ui-widget-content ui-corner-all"></input>
+            </fieldset>            
+            <div id="files" class="files"></div>
+            <br/>
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>             
+        </form>
