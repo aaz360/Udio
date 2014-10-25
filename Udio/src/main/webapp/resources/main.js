@@ -15,50 +15,86 @@ function initDialog(){
     width: 450,
     modal: true,    
     close: function() {
+        form = dialog.find("form" );
         form[ 0 ].reset();        
         $("#files").empty();
     }
   });
   
-  form = dialog.find("form" );
+  
 }
 
 function initFileUpload(){
-    angular.module('fileUpload', ['angularFileUpload']);
+var app = angular.module('fileUpload', ['angularFileUpload']);
 
-var UploadController = [ '$scope', '$upload', function($scope, $upload) {
-  $scope.onFileSelect = function($files) {
-    //$files: an array of files selected, each file has name, size, and type.
-    for (var i = 0; i < $files.length; i++) {
-      var file = $files[i];
-      $scope.upload = $upload.upload({
-        url: '//localhost:8080/upload', //upload.php script, node.js route, or servlet url
-        //method: 'POST' or 'PUT',
-        //headers: {'header-key': 'header-value'},
-        //withCredentials: true,
-        data: {myObj: $scope.myModelObj},
-        file: file, // or list of files ($files) for html5 only
-        //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
-        // customize file formData name ('Content-Disposition'), server side file variable name. 
-        //fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file' 
-        // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
-        //formDataAppender: function(formData, key, val){}
-      }).progress(function(evt) {
-        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-      }).success(function(data, status, headers, config) {
-        // file is uploaded successfully
-        console.log(data);
-      });
-      //.error(...)
-      //.then(success, error, progress); 
-      // access or attach event listeners to the underlying XMLHttpRequest.
-      //.xhr(function(xhr){xhr.upload.addEventListener(...)})
-    }
-    /* alternative way of uploading, send the file binary with the file's content-type.
-       Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed. 
-       It could also be used to monitor the progress of a normal http post/put request with large data*/
-    // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
-  };
-}];
+var UploadController = app.controller('UploadController',[ '$scope', '$upload', function($scope, $upload) {
+    $scope.uploadRightAway = false;
+   
+    $scope.onFileSelect = function($files) {        
+		$scope.selectedFiles = [];
+		$scope.progress = [];
+		if ($scope.upload && $scope.upload.length > 0) {
+			for (var i = 0; i < $scope.upload.length; i++) {
+				if ($scope.upload[i] != null) {
+					$scope.upload[i].abort();
+				}
+			}
+		}
+		$scope.upload = [];
+		$scope.uploadResult = [];
+		$scope.selectedFiles = $files;
+		$scope.dataUrls = [];
+		for ( var i = 0; i < $files.length; i++) {
+			var $file = $files[i];
+			if ($scope.fileReaderSupported && $file.type.indexOf('image') > -1) {
+				var fileReader = new FileReader();
+				fileReader.readAsDataURL($files[i]);
+				var loadFile = function(fileReader, index) {
+					fileReader.onload = function(e) {
+						$timeout(function() {
+							$scope.dataUrls[index] = e.target.result;
+						});
+					}
+				}(fileReader, i);
+			}
+			$scope.progress[i] = -1;
+			if ($scope.uploadRightAway) {
+				$scope.start(i);
+			}
+		}
+	 };
+    
+    $scope.start = function(index) {
+		$scope.progress[index] = 0;
+		$scope.errorMsg = null;
+		
+        $scope.upload[index] = $upload.upload({
+				url: "//localhost:8080/upload",
+				method: "POST",
+				headers: {'my-header': 'my-header-value'},
+                withCredentials: true,
+				data : {
+					tags : $scope.tags,
+					errorCode: $scope.generateErrorOnServer && $scope.serverErrorCode,
+					errorMessage: $scope.generateErrorOnServer && $scope.serverErrorMsg
+				},				
+				file: $scope.selectedFiles[index]				
+			});
+			$scope.upload[index].then(function(response) {
+				$timeout(function() {
+					$scope.uploadResult.push(response.data);
+				});
+			}, function(response) {
+				if (response.status > 0) $scope.errorMsg = response.status + ': ' + response.data;
+			}, function(evt) {
+				// Math.min is to fix IE which reports 200% sometimes
+				$scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+			});
+			$scope.upload[index].xhr(function(xhr){
+//				xhr.upload.addEventListener('abort', function() {console.log('abort complete')}, false);
+			});
+		}
+    
+}]);
     
 }

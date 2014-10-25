@@ -23,7 +23,7 @@ public class UploadController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public Files upload( @RequestParam(value="file[]") MultipartFile fileUpload, @RequestParam String tags) throws Exception{
+	public Files upload( @RequestParam(value="file") MultipartFile fileUpload, @RequestParam String tags) throws Exception{
 				
 		UploadFileArgs uploadArgs = new UploadFileArgs();
 		uploadArgs.inputStream = fileUpload.getInputStream();

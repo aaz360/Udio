@@ -34,64 +34,17 @@
                 <img name="upload" id="upload" src="/resources/1413571277_upload-48.png"/>
             </li>
         </ul>
-        </div>        
+        </div>                 
     </div>   
-        
-	<form style="display:none" action="upload" method="post" enctype="multipart/form-data">
-		<div>
-			Upload file: <input type="file" name="fileUpload1" id="fileUpload1"/>
-			<input type="submit" value="Upload"></input>
-		</div>
-	</form>   
-            
-    <form style="display:none" name="account_form" id="account_form" enctype="multipart/form-data">
-            <br/>
-            <br/>
-            <span class="btn btn-success fileinput-button">
-                <i class="glyphicon glyphicon-plus"></i>
-                <span>Add files...</span>
-                <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="file[]"></input>
-            </span>
-            <br/>
-            <br/>            
-            <fieldset>
-                <label for="tags">Tags</label>
-                <input type="text" name="tags" id="tags" class="text ui-widget-content ui-corner-all"></input>
-            </fieldset>            
-            <div id="files" class="files"></div>
-            <br/>
-            <div id="progress" class="progress">
-                <div class="progress-bar progress-bar-success"></div>
-            </div>             
-        </form>
+    <div class="conatiner" ng-include="'files.html'">
+    </div>
+
+
     <div id="dialog-form" title="Upload" >
+        <div ng-controller="UploadController" ng-app="fileUpload" ng-include="'upload.html'"></div>    
     </div>
 
-    <div class="upload-div" ng-controller="UploadController" ng-app="fileUpload">
-        
-        
-        </br>
-        Tags :<input class="ng-pristine ng-valid" type="text" ng-model="tagModel"></input>
-
-        <br/>
-        Progress:
-		<br/>
-		<br/>
-		<div ng-show="selectedFiles != null">
-			<div class="sel-file" ng-repeat="f in selectedFiles">
-				{{($index + 1) + '.'}}
-				<img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}">
-				<button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>
-				<span class="progress" ng-show="progress[$index] >= 0">						
-					<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
-				</span>				
-				<button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>
-				{{f.name}} - size: {{f.size}}B - type: {{f.type}}
-			</div>
-		</div>
-
-    </div>
+    
 
 
 </body>

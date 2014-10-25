@@ -16,5 +16,10 @@ public class SiteController {
 	public String login(){		
 		return "/main";
 	}
+
+	@RequestMapping(value="/upload.html",method = RequestMethod.GET)
+	public String upload(){		
+		return "/upload";
+	}
 		
 }

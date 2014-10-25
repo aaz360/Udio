@@ -89,3 +89,30 @@ fieldset {
     margin: 0px; 
     overflow: hidden;    
 }
+
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+
+.button {
+    padding: 1px 5px;
+    font-size: smaller;
+    margin: 0px 3px;
+}
+.sel-file {
+    padding: 1px 5px;
+    font-size: smaller;
+    color: #808080;
+}
+
+.upload-button {
+    width: 170px;
+    height: 30px;
+    display: inline-block;
+    line-height: 30px;
+    padding: 0px 10px;
+    background: none repeat scroll 0% 0% #CCC;
+    -moz-appearance: button;
+}
