@@ -1,0 +1,23 @@
+<div class="files" ng-repeat="file in fc.files">
+   <img src="/resources/file-64.png"</img>
+   <div class="file-item">
+       <div><a href="{{file.url}}" downnload="true">{{file.name}}</a></div>
+       <div>Size: {{file.size}} Date: {{file.date}}</div>
+       <div>
+            <span ng-repeat="tag in file.tags">{{tag}} </span>
+       </div>       
+   </div>
+</div>
+
+<style>
+    .files img {
+      float:left;
+      display: block;
+    }
+
+    .files {
+        
+        padding-bottom: 40px;
+    }   
+    
+</style>

@@ -41,14 +41,11 @@
 
 #upload {
     cursor: pointer;
+    padding-left: 70px;
 }
 
-.menu-left ul {
+ul {
     list-style: none;
-}
-
-.menu-left {
-    margin-top: 20px;
 }
 
 

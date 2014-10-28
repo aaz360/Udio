@@ -8,44 +8,50 @@
     <link rel="stylesheet" href="/resources/jquery-ui-1.11.1.custom//jquery-ui.structure.min.css"/>   
     <script type="text/javascript" src="/resources/jquery-1.11.1.min.js"></script>    
     <script type="text/javascript" src="/resources/jquery-ui-1.11.1.custom/jquery-ui.js"></script>
-    <script type="text/javascript" src="/resources/main.js"></script>    
     <!-- This is for file Upload -->
     <script src="/resources/angular-file-upload-bower-1.6.12/angular-file-upload-shim.min.js"></script> 
     <script src="/resources/angular.min.js"></script>
     <script src="/resources/angular-file-upload-bower-1.6.12/angular-file-upload.min.js"></script>    
+    <!-- This is for file Upload end-->    
+    <script type="text/javascript" src="/resources/upload.js"></script>    
+    <script type="text/javascript" src="/resources/tags.js"></script>    
+    <script type="text/javascript" src="/resources/files.js"></script>    
+    <script type="text/javascript" src="/resources/main.js"></script>        
     
     <title>Udio</title>
 </head>
-<body>
+<body ng-app="main">
     <div class="nav">
 		<div class="container">
 			<ul class="pull-left">
 				<li><img  id='logo' src='/resources/logo.png'></img>Beta</li>
 			</ul>			
 			<ul class="pull-right">				
-				<li><a href="#login">Log Out</a></li>
+				<li><a href="home.html">Log Out</a></li>
 			</ul>
 		</div>
 	</div>
-    <div class="container"> 
-        <div class="menu-left">
-        <ul>
-            <li>
-                <img name="upload" id="upload" src="/resources/1413571277_upload-48.png"/>
-            </li>
-        </ul>
-        </div>                 
-    </div>   
-    <div class="conatiner" ng-include="'files.html'">
+    <div class="container-fluid" style="padding-top:20px">
+        <div class="row">
+            <div class="col-md-2">
+                <img name="upload" id="upload" src="/resources/1413571277_upload-48.png"/>                
+            </div>
+            <div class="col-md-10">
+                <input type="text" placeholder="Search"></input>                
+            </div>            
+        </div>
+       <div class="row">
+           <div class="col-md-2">
+                <div ng-include="'tag-menu.html'" ng-controller="TagsController as tc"></div>            
+           </div>
+           <div class="col-md-10">
+                <div ng-include="'files.html'" ng-controller="FilesController as fc"></div>
+           </div>
+       </div>
     </div>
-
-
-    <div id="dialog-form" title="Upload" >
-        <div ng-controller="UploadController" ng-app="fileUpload" ng-include="'upload.html'"></div>    
-    </div>
-
     
-
-
+    <div id="dialog-form" title="Upload" >
+        <div ng-controller="UploadController" ng-include="'upload.html'"></div>    
+    </div>
 </body>
 </html>

@@ -1,0 +1,22 @@
+<form style="display" name="upload_form" id="upload_form" enctype="multipart/form-data">  
+    <label for="tags">Tags</label>
+    <input type="text" ng-model="tags" id="tags" name="tags" class="text ui-widget-content ui-corner-all"></input>
+    <div class="btn btn-success fileinput-button" ng-file-select="onFileSelect($files)">
+        <i class="glyphicon glyphicon-plus"></i> Add files...
+    </div>
+      
+
+	<div ng-show="selectedFiles != null">
+			<div class="sel-file" ng-repeat="f in selectedFiles">
+				{{($index + 1) + '.'}}
+				<img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}">
+				<button class="button" ng-click="start($index)" ng-show="progress[$index] &lt; 0"> Start</button>
+				<span class="progress" style="border: 1px solid">						
+					<div style="width:{{progress[$index]}}%">{{progress[$index]}}&#37;</div>
+				</span>				
+				<button class="button" ng-click="abort($index)" ng-show="progress[$index] < 100">Abort</button>
+				{{f.name}} - size: {{f.size}}B - type: {{f.type}}
+			</div>            
+    </div>
+
+</form>
