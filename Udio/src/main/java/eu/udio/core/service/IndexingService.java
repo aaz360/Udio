@@ -6,4 +6,5 @@ import eu.udio.core.domain.FileInfo;
 
 public interface IndexingService {
 	public List<FileInfo> listAllFiles();
+	public List<FileInfo> FindFiles(String[] keywords);
 }

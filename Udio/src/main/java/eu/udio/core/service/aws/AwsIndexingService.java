@@ -34,4 +34,10 @@ public class AwsIndexingService implements IndexingService {
 		return fileList;
 	}
 
+
+	@Override
+	public List<FileInfo> FindFiles(String[] keywords) {		
+		return null;
+	}
+
 }
